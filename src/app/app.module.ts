@@ -7,6 +7,9 @@ import { MaterialModule }         from '@angular/material';
 import { RouterModule }           from '@angular/router';
 
 //libraries
+import { AngularFireModule }      from 'angularfire2';
+
+//services
 import { AuthService }            from './services/auth.service';
 
 //app
@@ -36,7 +39,8 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
     AuthService
