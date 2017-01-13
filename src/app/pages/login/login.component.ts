@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+//angular
+import { Component, OnInit }  from '@angular/core';
+import { Router }             from '@angular/router';
+
+//services
+import { AuthService }        from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService , private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  login() {
+    this.authService.loginWithGoogle().then((data) => {
+      // Send them to the homepage if they are logged in
+      this.router.navigate(['']);
+    })
   }
-
 }

@@ -1,2 +1,14 @@
-<app-header></app-header>
+<md-toolbar color="primary">
+  <span>Jink</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="stretch"></span>
+
+  <span *ngIf="isLoggedIn" >
+    <small>
+        <a (click)="logout()">Logout</a>
+    </small>
+  </span>
+  <!-- <a routerLink="/login">Login</a> -->
+</md-toolbar>
 <router-outlet></router-outlet>
