@@ -8,6 +8,7 @@ import { RouterModule }           from '@angular/router';
 
 //libraries
 import { AngularFireModule }      from 'angularfire2';
+import { FlexLayoutModule }       from '@angular/flex-layout';
 
 //services
 import { AuthService }            from './services/auth.service';
@@ -40,7 +41,8 @@ export const firebaseConfig = {
     HttpModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    FlexLayoutModule.forRoot()
   ],
   providers: [
     AuthService
