@@ -1,10 +1,10 @@
-import { JinkPage } from './app.po';
+import { NgcliIssuesPage } from './app.po';
 
-describe('jink App', function() {
-  let page: JinkPage;
+describe('ngcli-issues App', function() {
+  let page: NgcliIssuesPage;
 
   beforeEach(() => {
-    page = new JinkPage();
+    page = new NgcliIssuesPage();
   });
 
   it('should display message saying app works', () => {

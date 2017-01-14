@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class JinkPage {
+export class NgcliIssuesPage {
   navigateTo() {
     return browser.get('/');
   }
