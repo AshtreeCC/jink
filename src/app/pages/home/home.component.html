@@ -1,8 +1,25 @@
-<div class="flex-container" fxLayout="column" fxLayoutAlign="space-around center">
+<md-card class="flex-container tasks-card" fxLayout="column" fxLayoutAlign="start start">
         <div class="flex-item">
                 <h1>What have you forgotten?</h1>
         </div>
-        <div class="flex-item">
-                        <md-input placeholder="Remember to..." ></md-input>
+        <div class="flex-item task-text">
+                <md-input placeholder="Remember to..." [(ngModel)]="newTask" (keyup.enter)="saveTask()"></md-input>
         </div>
-</div>
+
+        <md-card-content class="tasks-list">
+                <div class="flex-item flex-container" fxLayout="row" fxLayoutAlign="start center" *ngFor="let task of tasks | async">
+                        <button md-mini-fab color="primary" class="task-button">
+                                <md-icon>done</md-icon>
+                        </button>
+                        <div class="task-text" fxFlex="100%">
+                                {{task.$value}}
+                        </div>
+                        <button md-mini-fab  color="primary" class="task-button">
+                                <md-icon>create</md-icon>
+                        </button>
+                        <button md-mini-fab color="primary" class="task-button" (click)="deleteTask(task.$key)">
+                                <md-icon>clear</md-icon>
+                        </button>
+                </div>
+        </md-card-content>
+</md-card>

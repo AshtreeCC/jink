@@ -7,7 +7,9 @@ import {AngularFire, AuthProviders, AuthMethods}  from 'angularfire2';
 @Injectable()
 export class AuthService {
 
-  constructor(public af:AngularFire) { }
+  constructor(public af:AngularFire) {
+    this.af.auth.subscribe(auth => console.log(auth));
+  }
 
   /**
    * Logs in the user

@@ -2,11 +2,23 @@
 @import url("~https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("~@angular/material/core/theming/prebuilt/deeppurple-amber.css");
 
-body {
+@mixin background-opacity($color, $opacity: 0) {
+    background: rgba($color, $opacity);
+}
+
+html, body {
         margin: 10;
         font-family: Roboto, sans-serif;
+        height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
         font-size: 1.5em;
 }
+
+/* Useful common classes */
+.stretch {
+  // This fills the remaining space, by using flexbox. 
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
+ }
