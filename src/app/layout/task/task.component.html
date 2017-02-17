@@ -1,0 +1,16 @@
+<button md-mini-fab color="primary" class="task-button">
+        <md-icon>done</md-icon>
+</button>
+<div class="task-text" fxFlex="100%">
+        <md-input 
+                value="{{task.$value}}" 
+                [(ngModel)]="task.$value" 
+                (keyup.enter)="editTask(task)">
+        </md-input>
+</div>
+<button md-mini-fab color="primary" class="task-button" (click)="editMode(task.$key)">
+        md-icon>create</md-icon>
+</button>
+<button md-mini-fab color="primary" class="task-button" (click)="deleteTask(task.$key)">
+        <md-icon>delete forever</md-icon>
+</button>

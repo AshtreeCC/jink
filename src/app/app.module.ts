@@ -12,6 +12,7 @@ import { FlexLayoutModule }       from '@angular/flex-layout';
 
 //services
 import { AuthService }            from './services/auth.service';
+import { TaskService }            from './services/task.service';
 
 //app
 import { AppComponent }           from './app.component';
@@ -47,7 +48,8 @@ export const firebaseConfig = {
     FlexLayoutModule.forRoot()
   ],
   providers: [
-    AuthService
+    AuthService,
+    TaskService
   ],
   bootstrap: [
     AppComponent
