@@ -4,7 +4,7 @@
   <!-- This fills the remaining space of the current row -->
   <span class="stretch"></span>
 
-  <span *ngIf="isLoggedIn" >
+  <span *ngIf="auth.authenticated" >
     <small>
         <a (click)="logout()">Logout</a>
     </small>

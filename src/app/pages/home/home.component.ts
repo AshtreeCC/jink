@@ -1,9 +1,9 @@
+// angular
 import { Component, OnInit }                    from '@angular/core';
 import { Input, Output, EventEmitter }          from '@angular/core';
 
-// Services
+// services
 import { TaskService }                          from '../../services/task.service';
-
 
 @Component({
   selector: 'app-home',
@@ -12,22 +12,23 @@ import { TaskService }                          from '../../services/task.servic
 })
 export class HomeComponent implements OnInit {
 
-    @Output() createTask = new EventEmitter();
-
-    private newTask: string;
-    private tasks = [];
-
+    private title: string;
+    private tasks;
 
     constructor(private ts: TaskService) { 
     }
 
     ngOnInit() {
-        this.tasks = this.ts.getTasks();
+        this.tasks = this.ts.tasks;
+        // for(var task of this.ts.tasks){
+        //     console.log(task.$title);
+        // }
     }
 
-    submit():void {
-        if (this.newTask.length) {
-            this.createTask.emit(this.newTask)
+    createTask(): void {
+        if (this.title.length) {
+            this.ts.createTask(this.title);
+            this.title = '';
         }
     }
 

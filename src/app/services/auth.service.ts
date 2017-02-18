@@ -1,32 +1,46 @@
 // angular
-import { Injectable }                             from '@angular/core';
+import { Injectable }                                   from '@angular/core';
 
 // library
-import {AngularFire, AuthProviders, AuthMethods}  from 'angularfire2';
+import { AngularFire, FirebaseAuthState }               from 'angularfire2';
+import { AuthProviders, AuthMethods }                   from 'angularfire2';
 
 @Injectable()
 export class AuthService {
 
-  constructor(public af:AngularFire) {
-    this.af.auth.subscribe(auth => console.log(auth));
-  }
+    private authState: FirebaseAuthState = null;
 
-  /**
-   * Logs in the user
-   * @returns {firebase.Promise<FirebaseAuthState>}
-   */
-  loginWithGoogle() {
-    return this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup,
-    });
-  }
+    constructor(public af: AngularFire) {
+        af.auth.subscribe((state: FirebaseAuthState) => {
+            this.authState = state;
+        });
+    }
 
-  /**
-   * Logs out the current user
-   */
-  logout() {
-    return this.af.auth.logout();
-  }
+    get authenticated(): boolean {
+        return this.authState !== null;
+    }
+
+    get id(): string {
+        return this.authenticated ? this.authState.uid : '';
+    }
+
+    /**
+     * Logs in the user
+     */
+    login(provider: number): firebase.Promise<FirebaseAuthState> {
+        return this.af.auth.login({provider})
+            .catch(error => console.log('ERROR @ AuthService#login() :', error));
+    }
+
+    loginWithGoogle(): firebase.Promise<FirebaseAuthState> {
+        return this.login(AuthProviders.Google);
+    }
+
+    /**
+     * Logs out the current user
+     */
+    logout() {
+        return this.af.auth.logout();
+    }
 
 }

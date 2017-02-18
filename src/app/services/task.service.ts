@@ -1,33 +1,49 @@
+// angular
 import { Injectable }                           from '@angular/core';
 import { AngularFire, FirebaseListObservable }  from 'angularfire2';
+
+// services
+import { AuthService }                          from './auth.service';
+
+// models
+import { ITask, Task }                          from '../models/task.model';
 
 @Injectable()
 export class TaskService {
 
-  private tasks$: FirebaseListObservable<any[]>;
+  private tasks$: FirebaseListObservable<ITask[]>;
 
-  constructor( private af:AngularFire ) { 
-    this.tasks$ = af.database.list('/tasks');
-    //console.debug(this.tasks);
+  constructor( private af:AngularFire, auth: AuthService ) {
+    this.tasks$ = af.database.list(`/tasks/${auth.id}`);
+    console.log(`Auth: ${auth.id}`);
+    //console.log(this.tasks$);
   }
 
-  public getTasks() {
+  get tasks() {
       return this.tasks$;
   }
 
-  private createTask( newTask: string ) {
-    let promise = this.tasks$.push(newTask);
-    //promise.then(console.log(`Creating task: ${promise.key}`))
+  createTask( title: string ): firebase.Promise<any> {
+    let promise = this.tasks$.push(new Task(title));
+    promise.then((res) => {
+        console.log(`created task: ${res.key} with title: ${title}`)
+    });
+    promise.catch((err) => {
+        console.log('ERROR @ TaskService:createTask()', err);
+    });
+    return promise;
   }
 
-  private editTask( taskKey: string, taskValue: string ) {
-    console.debug(`Editing task: ${taskKey}`);
-    //this.tasks$.update(taskKey, taskValue);
+  updateTask( task: ITask, changes: any): firebase.Promise<any> {
+    console.debug(`editing task: ${task.$key}`);
+    let promise = this.tasks$.update(task.$key, changes);
+    return promise;
   }
 
-  private deleteTask( taskKey: string ) {
-    console.log(`Removing task: ${taskKey}`);
-    this.tasks$.remove(taskKey);
+  deletetask( task: ITask): firebase.Promise<any> {
+    console.log(`Removing task: ${task.$key}`);
+    let promise = this.tasks$.remove(task.$key);
+    return promise;
   }
 
 }
