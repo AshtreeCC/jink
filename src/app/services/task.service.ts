@@ -40,9 +40,11 @@ export class TaskService {
     return promise;
   }
 
-  deletetask( task: ITask): firebase.Promise<any> {
-    console.log(`Removing task: ${task.$key}`);
-    let promise = this.tasks$.remove(task.$key);
+  deleteTask( taskKey: string): firebase.Promise<any> {
+    let promise = this.tasks$.remove(taskKey);
+    promise.then((res) => {
+        console.log(`Deleted task: ${taskKey}`);
+    });
     return promise;
   }
 

@@ -32,4 +32,8 @@ export class HomeComponent implements OnInit {
         }
     }
 
+    deleteTask(key: string): void {
+        this.ts.deleteTask(key);
+    }
+
 }
