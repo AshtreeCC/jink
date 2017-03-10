@@ -12,6 +12,7 @@ import { FlexLayoutModule }       from '@angular/flex-layout';
 
 //services
 import { AuthService }            from './services/auth.service';
+import { TaskService }            from './services/task.service';
 
 //app
 import { AppComponent }           from './app.component';
@@ -20,7 +21,7 @@ import { APP_PAGE_COMPONENTS }    from './pages/index';
 
 //misc
 import { APP_ROUTES }             from './app.routes';
-import { DemoComponent } from './pages/demo/demo.component';
+import { DemoComponent }          from './pages/demo/demo.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAeP2LufplZQu8plXZkV0C2FvHLI7d88lQ",
@@ -47,7 +48,8 @@ export const firebaseConfig = {
     FlexLayoutModule.forRoot()
   ],
   providers: [
-    AuthService
+    AuthService,
+    TaskService
   ],
   bootstrap: [
     AppComponent

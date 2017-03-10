@@ -1,38 +1,41 @@
+// angular
 import { Component, OnInit }                    from '@angular/core';
-import { AngularFire, FirebaseListObservable }  from 'angularfire2';
+//import { Input, Output, EventEmitter }          from '@angular/core';
+import { ChangeDetectionStrategy }              from '@angular/core';
+import { Router }                               from '@angular/router';
+
+// services
+import { TaskService }                          from '../../services/task.service';
+import { AuthService }                          from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
-  private newTask: string;
-  private tasks: FirebaseListObservable<any[]>;
 
-  constructor(private af:AngularFire) { 
-    this.tasks = af.database.list('/tasks');
-    //console.debug(this.tasks);
-  }
+    private title: string;
+    private tasks;
 
-  ngOnInit() {
-  }
+    constructor(private ts: TaskService, private auth: AuthService, private router: Router) { 
+    
+    }
 
-  private createTask() {
-    let promise = this.tasks.push(this.newTask);
-    this.newTask = '';
-    //promise.then(console.log(`Creating task: ${promise.key}`))
-  }
+    ngOnInit() {
+        
+    }
 
-  private editTask(taskId: string) {
-    console.log(`Editing task: ${taskId}`);
-    //this.tasks.update(taskId);
-  }
+    createTask(): void {
+        if (this.title.length) {
+            this.ts.createTask(this.title);
+            this.title = '';
+        }
+    }
 
-  private deleteTask(taskId: string) {
-    console.log(`Removing task: ${taskId}`);
-    this.tasks.remove(taskId);
-  }
-
+    deleteTask(key: string): void {
+        this.ts.deleteTask(key);
+    }
 
 }

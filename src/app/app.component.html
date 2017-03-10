@@ -1,14 +1,16 @@
 <md-toolbar color="primary">
-  <span>Jink</span>
+    <span>Jink</span>
 
-  <!-- This fills the remaining space of the current row -->
-  <span class="stretch"></span>
+    <span class="stretch"><!-- Fills remaining space in current row --></span>
 
-  <span *ngIf="isLoggedIn" >
-    <small>
-        <a (click)="logout()">Logout</a>
-    </small>
-  </span>
-  <!-- <a routerLink="/login">Login</a> -->
+    <span *ngIf="auth.authenticated | async" >
+        <small>
+            <a (click)="this.auth.logout()">Logout</a>
+        </small>
+    </span>
+    <span *ngIf="!(auth.authenticated | async)">
+        <a routerLink="/login">Login</a>
+    </span>
 </md-toolbar>
+
 <router-outlet></router-outlet>
