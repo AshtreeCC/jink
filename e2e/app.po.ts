@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class NgcliIssuesPage {
+export class V100Rc1Page {
   navigateTo() {
     return browser.get('/');
   }
