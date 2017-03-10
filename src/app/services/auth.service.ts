@@ -27,8 +27,8 @@ export class AuthService {
     /**
      * Logs in the user
      */
-    login(provider: number): firebase.Promise<FirebaseAuthState> {
-        return this.af.auth.login({provider})
+    login(provider: number, method: number = AuthMethods.Popup): firebase.Promise<FirebaseAuthState> {
+        return this.af.auth.login({provider, method})
             .catch(error => console.log('ERROR @ AuthService#login() :', error));
     }
 

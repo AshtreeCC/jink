@@ -3,16 +3,18 @@
         <h1>What have you forgotten?</h1>
     </div>
     <div class="flex-item task-text">
-        <md-input 
-            placeholder="Remember to..." 
-            [(ngModel)]="title" 
-            (keyup.enter)="createTask()">
-        </md-input>
+        <form (submit)="createTask()">
+            <md-input 
+                placeholder="Remember to..." 
+                [(ngModel)]="title" 
+                (keyup.enter)="submit()">
+            </md-input>
+        </form>
     </div>
 
     <md-card-content class="tasks-list">
         <div class="flex-item flex-container" fxLayout="row" fxLayoutAlign="start center" 
-            *ngFor="let task of tasks | async">
+            *ngFor="let task of ts.tasks | async">
             <button md-mini-fab color="primary" class="task-button">
                 <md-icon>done</md-icon>
             </button>

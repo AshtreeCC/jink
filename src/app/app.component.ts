@@ -23,9 +23,9 @@ export class AppComponent {
         }
     }
 
-    logout() {
-        this.auth.logout();
-    }
+    // logout() {
+    //     this.auth.logout();
+    // }
 
 
 }
