@@ -1,3 +1,16 @@
-<md-toolbar>
-  Jink Deadlines
+<md-toolbar color="primary">
+    <span class="title link">
+        <a routerLink="/">Jink</a>
+    </span>
+
+    <span class="stretch"><!-- Fills remaining space in current row --></span>
+
+    <span *ngIf="authService.authenticated | async" class="logout link">
+        <small>
+            <a (click)="this.auth.logout()">Logout</a>
+        </small>
+    </span>
+    <span *ngIf="!(authService.authenticated | async)" class="login link">
+        <a routerLink="/login">Login</a>
+    </span>
 </md-toolbar>

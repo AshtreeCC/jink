@@ -4,11 +4,13 @@
     </div>
     <div class="flex-item task-text">
         <form (submit)="createTask()">
-            <md-input 
-                placeholder="Remember to..." 
-                [(ngModel)]="title" 
-                (keyup.enter)="submit()">
-            </md-input>
+            <md-input-container class="create-task">
+                <input mdInput
+                    name="createTask"
+                    placeholder="Remember to..." 
+                    [(ngModel)]="title" 
+                    (keyup.enter)="submit()">
+            </md-input-container>
         </form>
     </div>
 

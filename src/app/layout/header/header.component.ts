@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+// angular
+import { Component, OnInit }            from '@angular/core';
+import { Router }                       from '@angular/router';
+
+// app
+import { FirstnamePipe }                from '../../pipes/firstname.pipe';
+
+// services
+import { AuthService }                  from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +15,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+    constructor(public authService: AuthService, private _router: Router) {
+    
+        if(this.authService.authenticated) {
+            console.log("Successfully logged in.");
+        }
+        else {
+            console.log("Not yet logged in.");
+            //this._router.navigate(['/login']);
+        }
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+
+    }
+
+    logout() {
+        this.authService.logout();
+    }
 
 }

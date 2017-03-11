@@ -3,7 +3,7 @@ import { Component }    from '@angular/core';
 import { Router }       from '@angular/router';
 
 //services
-import { AuthService }  from './services/auth.service';
+//import { AuthService }  from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,9 @@ import { AuthService }  from './services/auth.service';
 })
 export class AppComponent {
 
+
+    constructor(){  }
+/*
     constructor(public auth: AuthService, private router: Router) {
     
         if(auth.authenticated) {
@@ -27,5 +30,5 @@ export class AppComponent {
     //     this.auth.logout();
     // }
 
-
+*/
 }

@@ -1,27 +1,31 @@
-//angular
+// angular
 import { BrowserModule }          from '@angular/platform-browser';
 import { NgModule }               from '@angular/core';
 import { FormsModule }            from '@angular/forms';
 import { HttpModule }             from '@angular/http';
 import { MaterialModule }         from '@angular/material';
+import { FlexLayoutModule }       from '@angular/flex-layout';
 import { RouterModule }           from '@angular/router';
 
-//libraries
+// libraries
 import { AngularFireModule }      from 'angularfire2';
-import { FlexLayoutModule }       from '@angular/flex-layout';
 
-//services
+// services
 import { AuthService }            from './services/auth.service';
+import { AuthGuard }              from './services/auth.service';
 import { TaskService }            from './services/task.service';
 
-//app
+// app
 import { AppComponent }           from './app.component';
 import { APP_LAYOUT_COMPONENTS }  from './layout/index';
 import { APP_PAGE_COMPONENTS }    from './pages/index';
 
-//misc
+// pipes
+import { FirstnamePipe }          from "./pipes/firstname.pipe";
+
+// misc
 import { APP_ROUTES }             from './app.routes';
-import { DemoComponent }          from './pages/demo/demo.component';
+//import { DemoComponent }          from './pages/demo/demo.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAeP2LufplZQu8plXZkV0C2FvHLI7d88lQ",
@@ -36,23 +40,28 @@ export const firebaseConfig = {
     AppComponent,
     APP_LAYOUT_COMPONENTS,
     APP_PAGE_COMPONENTS,
-    DemoComponent
+    FirstnamePipe,
+    //DemoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES),
     AngularFireModule.initializeApp(firebaseConfig),
+    MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
   providers: [
     AuthService,
+    AuthGuard,
     TaskService
   ],
   bootstrap: [
     AppComponent
+  ],
+  entryComponents: [
+      APP_LAYOUT_COMPONENTS
   ]
 })
 export class AppModule { }
