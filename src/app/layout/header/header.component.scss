@@ -1,0 +1,8 @@
+a.link {
+    &,
+    &:hover,
+    &:visited {
+        color: #FFF;
+        text-decoration: none;
+    }
+}
