@@ -14,6 +14,7 @@ import { AngularFireModule }      from 'angularfire2';
 import { AuthService }            from './services/auth.service';
 import { AuthGuard }              from './services/auth.service';
 import { TaskService }            from './services/task.service';
+//import { ConsoleService }         from '../system/console.service';
 
 // app
 import { AppComponent }           from './app.component';
@@ -55,7 +56,8 @@ export const firebaseConfig = {
   providers: [
     AuthService,
     AuthGuard,
-    TaskService
+    TaskService,
+    //ConsoleService
   ],
   bootstrap: [
     AppComponent

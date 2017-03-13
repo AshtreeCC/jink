@@ -16,7 +16,7 @@ import { AuthService }                            from '../../services/auth.serv
 export class LoginComponent implements OnInit {
 
   constructor(
-    public authService: AuthService, 
+    private authService: AuthService, 
     private router: Router,
     private mdIconRegistry: MdIconRegistry,
     private sanitizer: DomSanitizer

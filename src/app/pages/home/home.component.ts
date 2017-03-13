@@ -27,14 +27,18 @@ export class HomeComponent implements OnInit {
         
     }
 
-    createTask(): void {
+    clear() {
+        this.title = "";
+    }
+
+    createTask() {
         if (this.title.length) {
             this.ts.createTask(this.title);
             this.title = '';
         }
     }
 
-    deleteTask(key: string): void {
+    deleteTask(key: string) {
         this.ts.deleteTask(key);
     }
 
