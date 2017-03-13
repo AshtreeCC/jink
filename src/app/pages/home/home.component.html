@@ -9,7 +9,7 @@
                     name="createTask"
                     placeholder="Remember to..." 
                     [(ngModel)]="title" 
-                    (keyup.enter)="submit()">
+                    (keyup.escape)="clear()">
             </md-input-container>
         </form>
     </div>

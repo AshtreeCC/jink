@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable }  from 'angularfire2';
 
 // services
 import { AuthService }                          from './auth.service';
+import { LOG }                                  from "../../system/console.service";
 
 // models
 import { ITask, Task }                          from '../models/task.model';
@@ -13,10 +14,9 @@ export class TaskService {
 
   private tasks$: FirebaseListObservable<ITask[]>;
 
-  constructor( private af:AngularFire, auth: AuthService ) {
-    this.tasks$ = af.database.list(`/tasks/${auth.id}`);
-    console.log(`Auth: ${auth.id}`);
-    //console.log(this.tasks$);
+  constructor( private af:AngularFire, private authService: AuthService) {
+    this.tasks$ = af.database.list(`/tasks/${this.authService.id}`);
+    LOG.ASSERT(this.authService.id, "Auth ID: ");
   }
 
   get tasks() {
@@ -25,25 +25,27 @@ export class TaskService {
 
   createTask( title: string ): firebase.Promise<any> {
     let promise = this.tasks$.push(new Task(title));
-    promise.then((res) => {
-        console.log(`created task: ${res.key} with title: ${title}`)
+    promise.then((task) => {
+        LOG.SUCCESS("Created task: "+task.key, title, "TaskService#createTask()");
     });
-    promise.catch((err) => {
-        console.log('ERROR @ TaskService:createTask()', err);
+    promise.catch((error) => {
+        LOG.ERROR(title, error)
     });
     return promise;
   }
 
   updateTask( task: ITask, changes: any): firebase.Promise<any> {
-    console.debug(`editing task: ${task.$key}`);
     let promise = this.tasks$.update(task.$key, changes);
+    promise.then((result) => {
+        LOG.SUCCESS("Edited task: "+task.$key, changes, "TaskService#editTask()");
+    });
     return promise;
   }
 
   deleteTask( taskKey: string): firebase.Promise<any> {
     let promise = this.tasks$.remove(taskKey);
     promise.then((res) => {
-        console.log(`Deleted task: ${taskKey}`);
+        LOG.SUCCESS("Deleted task: "+taskKey, null, "TaskService#deleteTask()");
     });
     return promise;
   }

@@ -15,7 +15,7 @@ export class AppComponent {
 
     constructor(){  }
 /*
-    constructor(public auth: AuthService, private router: Router) {
+    constructor(private authService: AuthService, private router: Router) {
     
         if(auth.authenticated) {
             console.log("Successfully Logged in.");
@@ -27,7 +27,7 @@ export class AppComponent {
     }
 
     // logout() {
-    //     this.auth.logout();
+    //     this.authService.logout();
     // }
 
 */
