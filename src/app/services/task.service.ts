@@ -1,21 +1,22 @@
 // angular
-import { Injectable }                           from '@angular/core';
-import { AngularFire, FirebaseListObservable }  from 'angularfire2';
+import { Injectable }                                   from '@angular/core';
+import { AngularFire, FirebaseListObservable }          from 'angularfire2';
+import { AngularFireOffline, AfoListObservable }        from 'angularfire2-offline';
 
 // services
-import { AuthService }                          from './auth.service';
-import { LOG }                                  from "../../system/console.service";
+import { AuthService }                                  from './auth.service';
+import { LOG }                                          from "../../system/console.service";
 
 // models
-import { ITask, Task }                          from '../models/task.model';
+import { ITask, Task }                                  from '../models/task.model';
 
 @Injectable()
 export class TaskService {
 
-  private tasks$: FirebaseListObservable<ITask[]>;
+  private tasks$: AfoListObservable<ITask[]>;
 
-  constructor( private af:AngularFire, private authService: AuthService) {
-    this.tasks$ = af.database.list(`/tasks/${this.authService.id}`);
+  constructor(private afo: AngularFireOffline, private af: AngularFire, private authService: AuthService) {
+    this.tasks$ = afo.database.list(`/tasks/${this.authService.id}`);
     LOG.ASSERT(this.authService.id, "Auth ID: ");
   }
 
@@ -26,7 +27,7 @@ export class TaskService {
   createTask( title: string ): firebase.Promise<any> {
     let promise = this.tasks$.push(new Task(title));
     promise.then((task) => {
-        LOG.SUCCESS("Created task: "+task.key, title, "TaskService#createTask()");
+        LOG.SUCCESS("Created new task: ", title, "TaskService#createTask()");
     });
     promise.catch((error) => {
         LOG.ERROR(title, error)
@@ -42,10 +43,10 @@ export class TaskService {
     return promise;
   }
 
-  deleteTask( taskKey: string): firebase.Promise<any> {
-    let promise = this.tasks$.remove(taskKey);
+  deleteTask( task: ITask): firebase.Promise<any> {
+    let promise = this.tasks$.remove(task.$key);
     promise.then((res) => {
-        LOG.SUCCESS("Deleted task: "+taskKey, null, "TaskService#deleteTask()");
+        LOG.SUCCESS("Deleted task: "+task.$key, task, "TaskService#deleteTask()");
     });
     return promise;
   }
