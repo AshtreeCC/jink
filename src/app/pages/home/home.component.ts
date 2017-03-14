@@ -1,15 +1,18 @@
 // angular
-import { Component, OnInit }                    from '@angular/core';
-//import { Input, Output, EventEmitter }          from '@angular/core';
-import { ChangeDetectionStrategy }              from '@angular/core';
-import { Router }                               from '@angular/router';
+import { Component, OnInit }                            from '@angular/core';
+//import { Input, Output, EventEmitter }                  from '@angular/core';
+import { ChangeDetectionStrategy }                      from '@angular/core';
+import { Router }                                       from '@angular/router';
+
+// libraries
+import { AngularFireOffline, AfoListObservable }        from 'angularfire2-offline';
 
 //app
-import { ITask, Task }                          from '../../models/task.model';
+import { ITask, Task }                                  from '../../models/task.model';
 
 // services
-import { TaskService }                          from '../../services/task.service';
-import { AuthService }                          from '../../services/auth.service';
+import { TaskService }                                  from '../../services/task.service';
+import { AuthService }                                  from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +23,10 @@ import { AuthService }                          from '../../services/auth.servic
 export class HomeComponent implements OnInit {
 
     private title: string = "";
-    private tasks;
+    private tasks$: AfoListObservable<any>;
 
     constructor(private taskService: TaskService, private authService: AuthService, private router: Router) { 
-    
+        this.tasks$ = taskService.tasks.map((array) => array.reverse()) as AfoListObservable<any[]>;
     }
 
     ngOnInit() {
@@ -50,7 +53,7 @@ export class HomeComponent implements OnInit {
     }
 
     deleteTask(task: ITask) {
-        this.taskService.deleteTask(task.$key);
+        this.taskService.deleteTask(task);
     }
 
 
