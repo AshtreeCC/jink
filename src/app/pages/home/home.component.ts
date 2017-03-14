@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit {
     private tasks$: AfoListObservable<any>;
 
     constructor(private taskService: TaskService, private authService: AuthService, private router: Router) { 
-        this.tasks$ = taskService.tasks.map((array) => array.reverse()) as AfoListObservable<any[]>;
+        //this.tasks$ = taskService.tasks.map((array) => array.reverse()) as AfoListObservable<any[]>;
+        this.tasks$ = taskService.tasks;
     }
 
     ngOnInit() {

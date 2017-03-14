@@ -15,7 +15,6 @@ import { AngularFireOfflineModule }     from 'angularfire2-offline';
 import { AuthService }                  from './services/auth.service';
 import { AuthGuard }                    from './services/auth.service';
 import { TaskService }                  from './services/task.service';
-//import { ConsoleService }               from '../system/console.service';
 
 // app
 import { AppComponent }                 from './app.component';
@@ -27,7 +26,6 @@ import { FirstnamePipe }                from "./pipes/firstname.pipe";
 
 // misc
 import { APP_ROUTES }                   from './app.routes';
-//import { DemoComponent }                from './pages/demo/demo.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAeP2LufplZQu8plXZkV0C2FvHLI7d88lQ",
@@ -43,7 +41,6 @@ export const firebaseConfig = {
     APP_LAYOUT_COMPONENTS,
     APP_PAGE_COMPONENTS,
     FirstnamePipe,
-    //DemoComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +55,7 @@ export const firebaseConfig = {
   providers: [
     AuthService,
     AuthGuard,
-    TaskService,
-    //ConsoleService
+    TaskService
   ],
   bootstrap: [
     AppComponent

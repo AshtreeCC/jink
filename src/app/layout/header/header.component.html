@@ -6,7 +6,7 @@
     <span class="stretch"><!-- Fills remaining space in current row --></span>
 
     <span *ngIf="(auth$ | async)" class="logout link">
-        Hey {{ (name$ | async | firstname) }} | <a routerLink (click)="logout()">Logout</a>
+        Hi {{ (name$ | async | firstname) }} | <a routerLink (click)="logout()">Logout</a>
     </span>
     <span *ngIf="!(auth$ | async)" class="login link">
         <a routerLink="/login">Login</a>
