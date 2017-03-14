@@ -1,29 +1,22 @@
 .tasks-card {
-        height: 100%;
-}
 
+}
 
 .tasks-list {
-        width: 100%;
+    width: 100%;
 
-        .flex-item {
-                padding: 5px 0 2px;
-                border-bottom: 1px solid #EEE;
-        }
+    .flex-item {
+        padding: 2px 0;
+        border-bottom: 1px dotted #EEE;
+    }
 }
 
-.task-button {
-        opacity: 0.5;
-        margin: 1px;
+.task-create {
 
-        &:hover {
-                opacity: 0.75;
-        }
 }
 
 .task-text {
-        font-size: 1.75em;
-        padding-left: 5px;
-
+    font-size: 1.75em;
+    padding-left: 5px;
 }
 

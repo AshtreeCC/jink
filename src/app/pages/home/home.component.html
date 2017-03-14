@@ -1,35 +1,23 @@
-<md-card class="flex-container tasks-card" fxLayout="column" fxLayoutAlign="start start">
-    <div class="flex-item">
-        <h1>What have you forgotten?</h1>
-    </div>
+<md-card class="flex-container tasks-card" fxLayout="column" fxLayoutAlign="start stretch">
     <div class="flex-item task-text">
         <form (submit)="createTask()">
-            <md-input-container class="create-task">
-                <input mdInput
+            <md-input-container class="task-create" fxFill>
+                <input mdInput 
                     name="createTask"
                     placeholder="Remember to..." 
                     [(ngModel)]="title" 
-                    (keyup.escape)="clear()">
+                    (keyup.escape)="clearTask()">
             </md-input-container>
         </form>
     </div>
 
-    <md-card-content class="tasks-list">
-        <div class="flex-item flex-container" fxLayout="row" fxLayoutAlign="start center" 
-            *ngFor="let task of ts.tasks | async">
-            <button md-mini-fab color="primary" class="task-button">
-                <md-icon>done</md-icon>
-            </button>
-            <div class="task-text" fxFlex="100%">
-                {{task.title}}
-            </div>
-            <button md-mini-fab  color="primary" class="task-button">
-                <md-icon>create</md-icon>
-            </button>
-            <button md-mini-fab color="primary" class="task-button" 
-                (click)="deleteTask(task.$key)">
-                <md-icon>clear</md-icon>
-            </button>
-        </div>
+    <md-card-content class="tasks-list" *ngFor="let task of taskService.tasks | async">
+        <app-task
+            [task]="task"
+            [editMode]="editMode"
+            (toggleDone)="toggleDone($event)"
+            (updateTask)="updateTask($event)"
+            (deleteTask)="deleteTask($event)"></app-task>
+            
     </md-card-content>
 </md-card>

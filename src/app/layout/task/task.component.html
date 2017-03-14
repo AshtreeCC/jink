@@ -1,16 +1,27 @@
-<button md-mini-fab color="primary" class="task-button">
+
+<div class="flex-item flex-container" fxLayout="row" fxLayoutAlign="start stretch" [ngClass]="{done: task.completed, edit: editMode}">
+    <button md-mini-fab color="primary" class="task-button" (click)="toggleDone.emit(task)">
         <md-icon>done</md-icon>
-</button>
-<div class="task-text" fxFlex="100%">
-        <md-input 
-                value="{{task.$value}}" 
-                [(ngModel)]="task.$value" 
-                (keyup.enter)="editTask(task)">
-        </md-input>
+    </button>
+    <!--<div class="task-text" fxFlex="100%" *ngIf="!(editMode)" (focus)="toggleEdit()" tabIndex="0">
+        {{ title }}
+        </div>-->
+
+    <div fxFlex="100%">
+        <input mdInput class="task-text"
+            name="editTask"
+            [(ngModel)]="title"
+            (click)="toggleEdit()"
+            (blur)="editTask()"
+            (keyup.enter)="editTask()"
+            (keyup.escape)="cancelEdit(task)">
+    </div>
+
+    <!--<button md-mini-fab  color="primary" class="task-button" (click)="toggleEdit()">
+        <md-icon>create</md-icon>
+    </button>-->
+    <button md-mini-fab color="primary" class="task-button" (click)="deleteTask.emit(task.$key)">
+        <md-icon>clear</md-icon>
+    </button>
 </div>
-<button md-mini-fab color="primary" class="task-button" (click)="editMode(task.$key)">
-        md-icon>create</md-icon>
-</button>
-<button md-mini-fab color="primary" class="task-button" (click)="deleteTask(task.$key)">
-        <md-icon>delete forever</md-icon>
-</button>
+

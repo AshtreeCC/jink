@@ -4,6 +4,9 @@ import { Component, OnInit }                    from '@angular/core';
 import { ChangeDetectionStrategy }              from '@angular/core';
 import { Router }                               from '@angular/router';
 
+//app
+import { ITask, Task }                          from '../../models/task.model';
+
 // services
 import { TaskService }                          from '../../services/task.service';
 import { AuthService }                          from '../../services/auth.service';
@@ -16,10 +19,10 @@ import { AuthService }                          from '../../services/auth.servic
 })
 export class HomeComponent implements OnInit {
 
-    private title: string;
+    private title: string = "";
     private tasks;
 
-    constructor(private ts: TaskService, private auth: AuthService, private router: Router) { 
+    constructor(private taskService: TaskService, private authService: AuthService, private router: Router) { 
     
     }
 
@@ -27,19 +30,28 @@ export class HomeComponent implements OnInit {
         
     }
 
-    clear() {
+    clearTask() {
         this.title = "";
     }
 
     createTask() {
         if (this.title.length) {
-            this.ts.createTask(this.title);
-            this.title = '';
+            this.taskService.createTask(this.title);
+            this.title = "";
         }
     }
-
-    deleteTask(key: string) {
-        this.ts.deleteTask(key);
+    
+    toggleDone(task: ITask) {
+        this.taskService.updateTask(task, {completed: !task.completed});
     }
+
+    updateTask(event) {
+        this.taskService.updateTask(event.task, {title: event.title});
+    }
+
+    deleteTask(task: ITask) {
+        this.taskService.deleteTask(task.$key);
+    }
+
 
 }
