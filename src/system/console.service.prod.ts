@@ -22,6 +22,6 @@ export class ConsoleService {
 
     static FAILURE(message: string = "", message_var: any = null, caller: string = "") {}
 
-    static ASSERT(condition: boolean, message: string = "", caller: string = ""){}
+    static ASSERT(condition: any, message: string = "", caller: string = ""){}
 
 }

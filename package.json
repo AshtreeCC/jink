@@ -8,7 +8,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "sw": "sw-precache --root=src --verbose",
+    "precache": "sw-precache --root=dist --config=swconfig.js --verbose",
+    "live": "cd dist && live-server --host=localhost --port=8003 --entry-file=/index.html"
+
+
   },
   "private": true,
   "dependencies": {
