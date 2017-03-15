@@ -1,0 +1,15 @@
+a {
+    .link & {
+        &,
+        &:active,
+        &:visited {
+            color: #DEF;
+            text-decoration: none;
+            cursor: pointer;
+        },
+        &:hover {
+            color: #FFF;
+        }
+
+    }       
+}

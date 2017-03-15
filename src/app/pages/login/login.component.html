@@ -1,0 +1,16 @@
+<div class="flex-container" fxLayout="column" fxLayoutAlign="center center">
+        <div class="flex-item">
+            <md-icon class="lock-icon material-icons md-60p" svgIcon="login-page-lock"></md-icon>
+        </div>
+        
+        <div class="flex-item">
+            <span class="error" *ngIf="error">{{ error }}</span>
+        </div>
+
+        <div class="flex-item">
+                <button md-button class="login" (click)="login()">
+                        <md-icon class="material-icons md-48" style="width:48px; height:48px; font-size:48px" svgIcon="sign-in-with-google"></md-icon>
+                        Sign in with Google
+                </button>
+        </div>
+</div>

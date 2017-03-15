@@ -1,0 +1,23 @@
+<md-card class="flex-container tasks-card" fxLayout="column" fxLayoutAlign="start stretch">
+    <div class="flex-item task-text">
+        <form (submit)="createTask()">
+            <md-input-container class="task-create" fxFill>
+                <input mdInput 
+                    name="createTask"
+                    placeholder="Remember to..." 
+                    [(ngModel)]="title" 
+                    (keyup.escape)="clearTask()">
+            </md-input-container>
+        </form>
+    </div>
+
+    <md-card-content class="tasks-list" *ngFor="let task of tasks$ | async">
+        <app-task
+            [task]="task"
+            [editMode]="editMode"
+            (toggleDone)="toggleDone($event)"
+            (updateTask)="updateTask($event)"
+            (deleteTask)="deleteTask($event)"></app-task>
+            
+    </md-card-content>
+</md-card>

@@ -1,0 +1,45 @@
+.flex-container {
+    border-bottom: 2px dotted #EEE;
+    padding-bottom: 3px;
+    margin: -5px;
+
+    &.edit {
+        border-bottom: 2px solid #DDD;
+    }
+}
+
+.task-button {
+    opacity: 0.5;
+    margin: 1px;
+    font-size: 1em;
+
+    &:hover {
+            opacity: 0.75;
+    }
+
+    .done & {
+        color: rgba(0,0,0,.38);
+        background-color: rgba(0,0,0,.12);
+        box-shadow: none;
+    }
+}
+
+.task-text {
+    color: #666;
+    font-size: 1.5em;
+    padding-left: 5px;
+    margin-top: 10px;
+
+    .done & {
+        color: #EEE;
+        text-decoration: line-through;
+    }
+
+    .edit & {
+        color: #000;
+    }
+
+    .edit.done & {
+        color: #DDD;
+    }
+}
